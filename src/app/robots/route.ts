@@ -1,15 +1,12 @@
-// src/app/robots/route.ts
-import { MetadataRoute } from 'next'
-
-export function GET(): Response {
-  const content = `
-User-agent: *
+export async function GET() {
+  return new Response(
+    `User-agent: *
 Allow: /
-Sitemap: https://egskollenergy.com/sitemap.xml
-`
-  return new Response(content.trim(), {
-    headers: { 'Content-Type': 'text/plain' },
-  })
+Sitemap: https://egskollenergy.com/sitemap.xml`,
+    {
+      headers: { "Content-Type": "text/plain" }, // 👈 Importante
+    }
+  )
 }
 
-export const dynamic = 'force-static'
+export const dynamic = "force-static"
