@@ -1,4 +1,4 @@
-'use client'
+
 import { useLanguage } from '../LanguageContext'
 
 export const metadata = {

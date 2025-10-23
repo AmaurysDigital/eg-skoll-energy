@@ -1,4 +1,4 @@
-'use client'
+
 import { useLanguage } from '../LanguageContext'
 import Image from 'next/image'
 
