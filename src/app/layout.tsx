@@ -1,110 +1,100 @@
-'use client'
+<script type="application/ld+json" dangerouslySetInnerHTML={{
+  __html: JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "EG Sköll Energy",
+    "url": "https://egskollenergy.com",
+    "logo": "https://egskollenergy.com/Logo2.png",
+    "sameAs": [
+      "https://www.instagram.com/egskollenergy",
+      "https://www.linkedin.com/company/egskollenergy"
+    ],
+    "description": "Soluciones solares innovadoras para hogares e industrias. EG Sköll Energy diseña e instala sistemas eficientes y sostenibles que impulsan un futuro limpio."
+  })
+}} />
+
+
+// --- METADATOS ---
+export const metadata = {
+  title: {
+    default: "EG Sköll Energy | Energía Solar Sostenible",
+    template: "%s | EG Sköll Energy",
+  },
+  description:
+    "Soluciones solares innovadoras para hogares e industrias. EG Sköll Energy diseña e instala sistemas eficientes y sostenibles que impulsan un futuro limpio.",
+  keywords: [
+    "energía solar",
+    "paneles solares",
+    "Sköll Energy",
+    "energía sostenible",
+    "renovables",
+    "instalación de paneles solares",
+    "solar energy",
+    "green energy solutions",
+    "solar panels installation",
+    "clean energy",
+  ],
+  metadataBase: new URL("https://eg-skoll-energy.vercel.app"),
+  openGraph: {
+    title: "EG Sköll Energy | Solar Energy Solutions",
+    description:
+      "Innovative solar energy systems for homes and industries. EG Sköll Energy designs and installs efficient, sustainable systems for a cleaner future.",
+    url: "https://eg-skoll-energy.vercel.app",
+    siteName: "EG Sköll Energy",
+    images: [
+      {
+        url: "/Logo2.png",
+        width: 800,
+        height: 600,
+        alt: "EG Sköll Energy Logo",
+      },
+    ],
+    locale: "es_ES",
+    alternateLocale: ["en_US"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EG Sköll Energy | Energía Solar Sostenible",
+    description:
+      "Soluciones solares eficientes para hogares y empresas. EG Sköll Energy impulsa un futuro más limpio y verde.",
+    images: ["/Logo2.png"],
+  },
+  alternates: {
+    languages: {
+      es: "https://eg-skoll-energy.vercel.app",
+      en: "https://eg-skoll-energy.vercel.app",
+    },
+  },
+  icons: {
+    icon: "/favicon.png",
+  },
+};
+
+// --- SERVIDOR ---
 import './globals.css'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
-import { useLanguage, LanguageProvider } from './LanguageContext'
+import Navbar from './components/Navbar'
+import HtmlLang from './components/HtmlLang' // cliente que actualiza <html lang>
+import { LanguageProvider } from './LanguageContext'
 
-function Navbar() {
-  const { lang, setLang } = useLanguage()
-  const [open, setOpen] = useState(false)
-
-  const nav = {
-    es: { home: 'Inicio', about: 'Nosotros', services: 'Servicios', projects: 'Proyectos', contact: 'Contacto' },
-    en: { home: 'Home', about: 'About', services: 'Services', projects: 'Projects', contact: 'Contact' },
-  }[lang]
-
-  return (
-    <nav className="w-full bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-      <div className="flex items-center justify-between px-6 py-4">
-        {/* Logo y título */}
-        <div className="flex items-center gap-3">
-          <Image src="/Logo2.png" alt="Sköll Energy Logo" width={40} height={40} />
-          <h1 className="text-xl md:text-2xl font-bold text-emerald-600">Sköll Energy</h1>
-        </div>
-
-        {/* Botón hamburguesa móvil */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden p-2 border border-emerald-600 rounded text-emerald-600"
-        >
-          ☰
-        </button>
-
-        {/* Menú principal */}
-        <ul
-          className={`flex-col md:flex md:flex-row md:gap-6 text-sm font-medium absolute md:static bg-white md:bg-transparent w-full md:w-auto left-0 top-[70px] overflow-hidden transition-all duration-500 ease-in-out ${
-            open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 md:max-h-none md:flex md:opacity-100'
-          }`}
-        >
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/">{nav.home}</Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/about">{nav.about}</Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/services">{nav.services}</Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/projects">{nav.projects}</Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/contact">{nav.contact}</Link>
-          </li>
-
-          {/* Selector de idioma dentro del menú móvil */}
-          <div className="flex md:hidden justify-center gap-2 py-3 border-t border-gray-200 mt-2">
-            <button
-              onClick={() => setLang('es')}
-              className={`px-2 py-1 rounded ${lang === 'es' ? 'bg-emerald-600 text-white' : 'border border-emerald-600 text-emerald-600'
-                }`}
-            >
-              🇪🇸
-            </button>
-            <button
-              onClick={() => setLang('en')}
-              className={`px-2 py-1 rounded ${lang === 'en' ? 'bg-emerald-600 text-white' : 'border border-emerald-600 text-emerald-600'
-                }`}
-            >
-              🇺🇸
-            </button>
-          </div>
-        </ul>
-
-
-        {/* Selector de idioma en escritorio */}
-        <div className="hidden md:flex gap-2">
-          <button
-            onClick={() => setLang('es')}
-            className={`px-2 py-1 rounded ${lang === 'es' ? 'bg-emerald-600 text-white' : 'border border-emerald-600 text-emerald-600'
-              }`}
-          >
-            🇪🇸
-          </button>
-          <button
-            onClick={() => setLang('en')}
-            className={`px-2 py-1 rounded ${lang === 'en' ? 'bg-emerald-600 text-white' : 'border border-emerald-600 text-emerald-600'
-              }`}
-          >
-            🇺🇸
-          </button>
-        </div>
-      </div>
-    </nav>
-  )
-}
-
+// ✅ Layout principal
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
+    // Valor inicial para el servidor (bots y SEO)
     <html lang="es">
       <body className="bg-gradient-to-b from-white to-gray-50 text-gray-800">
+        {/* El proveedor maneja el idioma y contexto global */}
         <LanguageProvider>
+          {/* ✅ Este componente cliente actualiza dinámicamente <html lang="..."> */}
+          <HtmlLang />
+
           <Navbar />
           <main>{children}</main>
+
           <footer className="bg-gray-900 text-gray-200 py-8 mt-20 text-center">
             <p>
-              © {new Date().getFullYear()} Sköll Energy — Energía solar para un mundo mejor / Solar energy for a better world.
+              © {new Date().getFullYear()} Sköll Energy — Energía solar para un
+              mundo mejor / Solar energy for a better world.
             </p>
           </footer>
         </LanguageProvider>

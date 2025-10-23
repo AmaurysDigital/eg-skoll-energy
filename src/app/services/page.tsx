@@ -1,6 +1,34 @@
 'use client'
 import { useLanguage } from '../LanguageContext'
 
+export const metadata = {
+  title: "Servicios | EG Sköll Energy",
+  description:
+    "Diseñamos, instalamos y mantenemos sistemas solares fotovoltaicos. Servicios adaptados a hogares, industrias y empresas comprometidas con la sostenibilidad.",
+  keywords: [
+    "servicios solares",
+    "instalación de paneles solares",
+    "mantenimiento solar",
+    "energía renovable",
+    "sistemas fotovoltaicos",
+  ],
+  openGraph: {
+    title: "Servicios solares | EG Sköll Energy",
+    description:
+      "Instalaciones solares residenciales, comerciales e industriales con tecnología avanzada y soporte integral.",
+    url: "https://egskollenergy.com/services",
+    images: ["/Logo2.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Servicios solares | EG Sköll Energy",
+    description:
+      "Soluciones solares eficientes adaptadas a cada necesidad. Desde el diseño hasta la puesta en marcha.",
+    images: ["/Logo2.png"],
+  },
+}
+
+
 export default function Services() {
   const { lang } = useLanguage()
 

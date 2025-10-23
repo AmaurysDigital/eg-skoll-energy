@@ -1,6 +1,34 @@
 'use client'
 import { useLanguage } from '../LanguageContext'
 
+export const metadata = {
+  title: "Nosotros | EG Sköll Energy",
+  description:
+    "En EG Sköll Energy creemos en un futuro impulsado por la energía limpia. Nuestro equipo de ingenieros y técnicos combina innovación, experiencia y sostenibilidad.",
+  keywords: [
+    "quienes somos",
+    "equipo Sköll Energy",
+    "ingenieros solares",
+    "energía limpia",
+    "sostenibilidad",
+  ],
+  openGraph: {
+    title: "Nosotros | EG Sköll Energy",
+    description:
+      "Equipo de ingenieros expertos en energía solar comprometidos con el medio ambiente y la innovación tecnológica.",
+    url: "https://egskollenergy.com/about",
+    images: ["/Logo2.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Conoce a EG Sköll Energy",
+    description:
+      "Equipo multidisciplinario dedicado a impulsar la energía solar sostenible en América Latina.",
+    images: ["/Logo2.png"],
+  },
+}
+
+
 export default function About() {
   const { lang } = useLanguage()
 

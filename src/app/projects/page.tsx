@@ -2,6 +2,34 @@
 import { useLanguage } from '../LanguageContext'
 import Image from 'next/image'
 
+export const metadata = {
+  title: "Proyectos | EG Sköll Energy",
+  description:
+    "Proyectos de energía solar desarrollados en hogares, industrias y comunidades. Conoce nuestro impacto sostenible y tecnológico.",
+  keywords: [
+    "proyectos solares",
+    "energía verde",
+    "Sköll Energy",
+    "casos de éxito",
+    "energía sostenible",
+  ],
+  openGraph: {
+    title: "Proyectos | EG Sköll Energy",
+    description:
+      "Descubre nuestros proyectos solares en funcionamiento. Eficiencia, innovación y compromiso ambiental.",
+    url: "https://egskollenergy.com/projects",
+    images: ["/Logo2.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Proyectos solares destacados | EG Sköll Energy",
+    description:
+      "Instalaciones solares realizadas con tecnología de punta y enfoque ecológico.",
+    images: ["/Logo2.png"],
+  },
+}
+
+
 export default function Projects() {
   const { lang } = useLanguage()
 

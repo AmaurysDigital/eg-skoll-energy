@@ -1,6 +1,33 @@
 'use client'
 import { useLanguage } from '../LanguageContext'
 
+export const metadata = {
+  title: "Contacto | EG Sköll Energy",
+  description:
+    "Contáctanos para asesoramiento personalizado en energía solar. Nuestro equipo responderá tus consultas sobre proyectos, precios y mantenimiento.",
+  keywords: [
+    "contacto Sköll Energy",
+    "asesoría solar",
+    "energía limpia",
+    "consultoría fotovoltaica",
+  ],
+  openGraph: {
+    title: "Contacto | EG Sköll Energy",
+    description:
+      "Solicita tu cotización solar y únete a la transición energética con EG Sköll Energy.",
+    url: "https://egskollenergy.com/contact",
+    images: ["/Logo2.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contáctanos | EG Sköll Energy",
+    description:
+      "Comunícate con EG Sköll Energy y da el primer paso hacia un futuro sostenible.",
+    images: ["/Logo2.png"],
+  },
+}
+
+
 export default function Contact() {
   const { lang } = useLanguage()
 
