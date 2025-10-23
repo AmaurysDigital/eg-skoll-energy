@@ -1,5 +1,6 @@
-// --- METADATOS DEL SITIO (SEO Y REDES SOCIALES) ---
+// --- METADATOS ---
 export const metadata = {
+  metadataBase: new URL("https://egskollenergy.com"),
   title: {
     default: "EG Sköll Energy | Energía Solar Sostenible",
     template: "%s | EG Sköll Energy",
@@ -48,34 +49,23 @@ export const metadata = {
   },
 }
 
-// --- IMPORTS DEL SERVIDOR ---
+// --- SERVIDOR ---
 import "./globals.css"
 import Navbar from "./components/Navbar"
 import HtmlLang from "./components/HtmlLang"
 import { LanguageProvider } from "./LanguageContext"
 
-// --- LAYOUT PRINCIPAL ---
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // Valor inicial del atributo <html lang> (ajustado luego dinámicamente por HtmlLang)
     <html lang="es">
       <body className="bg-gradient-to-b from-white to-gray-50 text-gray-800">
-        {/* Proveedor global de idioma */}
         <LanguageProvider>
-          {/* Cliente que actualiza dinámicamente el <html lang="..."> */}
           <HtmlLang />
-
-          {/* Navbar global bilingüe */}
           <Navbar />
-
-          {/* Contenido de cada página */}
           <main>{children}</main>
-
-          {/* Pie de página global */}
           <footer className="bg-gray-900 text-gray-200 py-8 mt-20 text-center">
             <p>
-              © {new Date().getFullYear()} Sköll Energy — Energía solar para un
-              mundo mejor / Solar energy for a better world.
+              © {new Date().getFullYear()} Sköll Energy — Energía solar para un mundo mejor / Solar energy for a better world.
             </p>
           </footer>
         </LanguageProvider>

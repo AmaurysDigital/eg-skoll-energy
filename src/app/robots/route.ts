@@ -1,16 +1,15 @@
-// 📁 src/app/robots/route.ts
-export const runtime = 'edge' // opcional, mejora rendimiento
+// src/app/robots/route.ts
+import { MetadataRoute } from 'next'
 
-export async function GET() {
-  const body = `User-agent: *
+export function GET(): Response {
+  const content = `
+User-agent: *
 Allow: /
 Sitemap: https://egskollenergy.com/sitemap.xml
 `
-
-  return new Response(body, {
-    headers: {
-      'Content-Type': 'text/plain; charset=utf-8',
-    },
+  return new Response(content.trim(), {
+    headers: { 'Content-Type': 'text/plain' },
   })
 }
 
+export const dynamic = 'force-static'
