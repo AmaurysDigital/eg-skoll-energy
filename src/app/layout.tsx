@@ -1,20 +1,4 @@
-<script type="application/ld+json" dangerouslySetInnerHTML={{
-  __html: JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "EG Sköll Energy",
-    "url": "https://egskollenergy.com",
-    "logo": "https://egskollenergy.com/Logo2.png",
-    "sameAs": [
-      "https://www.instagram.com/egskollenergy",
-      "https://www.linkedin.com/company/egskollenergy"
-    ],
-    "description": "Soluciones solares innovadoras para hogares e industrias. EG Sköll Energy diseña e instala sistemas eficientes y sostenibles que impulsan un futuro limpio."
-  })
-}} />
-
-
-// --- METADATOS ---
+// --- METADATOS DEL SITIO (SEO Y REDES SOCIALES) ---
 export const metadata = {
   title: {
     default: "EG Sköll Energy | Energía Solar Sostenible",
@@ -34,12 +18,11 @@ export const metadata = {
     "solar panels installation",
     "clean energy",
   ],
-  metadataBase: new URL("https://eg-skoll-energy.vercel.app"),
   openGraph: {
     title: "EG Sköll Energy | Solar Energy Solutions",
     description:
       "Innovative solar energy systems for homes and industries. EG Sköll Energy designs and installs efficient, sustainable systems for a cleaner future.",
-    url: "https://eg-skoll-energy.vercel.app",
+    url: "https://egskollenergy.com",
     siteName: "EG Sköll Energy",
     images: [
       {
@@ -60,37 +43,35 @@ export const metadata = {
       "Soluciones solares eficientes para hogares y empresas. EG Sköll Energy impulsa un futuro más limpio y verde.",
     images: ["/Logo2.png"],
   },
-  alternates: {
-    languages: {
-      es: "https://eg-skoll-energy.vercel.app",
-      en: "https://eg-skoll-energy.vercel.app",
-    },
-  },
   icons: {
     icon: "/favicon.png",
   },
-};
+}
 
-// --- SERVIDOR ---
-import './globals.css'
-import Navbar from './components/Navbar'
-import HtmlLang from './components/HtmlLang' // cliente que actualiza <html lang>
-import { LanguageProvider } from './LanguageContext'
+// --- IMPORTS DEL SERVIDOR ---
+import "./globals.css"
+import Navbar from "./components/Navbar"
+import HtmlLang from "./components/HtmlLang"
+import { LanguageProvider } from "./LanguageContext"
 
-// ✅ Layout principal
+// --- LAYOUT PRINCIPAL ---
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // Valor inicial para el servidor (bots y SEO)
+    // Valor inicial del atributo <html lang> (ajustado luego dinámicamente por HtmlLang)
     <html lang="es">
       <body className="bg-gradient-to-b from-white to-gray-50 text-gray-800">
-        {/* El proveedor maneja el idioma y contexto global */}
+        {/* Proveedor global de idioma */}
         <LanguageProvider>
-          {/* ✅ Este componente cliente actualiza dinámicamente <html lang="..."> */}
+          {/* Cliente que actualiza dinámicamente el <html lang="..."> */}
           <HtmlLang />
 
+          {/* Navbar global bilingüe */}
           <Navbar />
+
+          {/* Contenido de cada página */}
           <main>{children}</main>
 
+          {/* Pie de página global */}
           <footer className="bg-gray-900 text-gray-200 py-8 mt-20 text-center">
             <p>
               © {new Date().getFullYear()} Sköll Energy — Energía solar para un
@@ -102,3 +83,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+

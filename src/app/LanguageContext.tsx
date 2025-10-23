@@ -1,36 +1,44 @@
 'use client'
+
 import { createContext, useContext, useState, useEffect } from 'react'
 
-type Lang = 'es' | 'en'
-interface LangContextType {
-  lang: Lang
-  setLang: (l: Lang) => void
+// --- Definición del contexto ---
+type LanguageContextType = {
+  lang: 'es' | 'en'
+  setLang: (lang: 'es' | 'en') => void
 }
 
-const LangContext = createContext<LangContextType | undefined>(undefined)
+// Creamos el contexto inicial (sin valor por defecto real)
+const LanguageContext = createContext<LanguageContextType>({
+  lang: 'es',
+  setLang: () => {},
+})
 
+// --- Proveedor global del contexto ---
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Lang>('es')
+  const [lang, setLang] = useState<'es' | 'en'>('es')
 
+  // Guarda la preferencia del idioma en localStorage para recordar al usuario
   useEffect(() => {
-    const saved = localStorage.getItem('lang') as Lang | null
-    if (saved) setLang(saved)
+    const storedLang = localStorage.getItem('lang') as 'es' | 'en' | null
+    if (storedLang) {
+      setLang(storedLang)
+    }
   }, [])
 
-  const changeLang = (l: Lang) => {
-    setLang(l)
-    localStorage.setItem('lang', l)
-  }
+  // Cada vez que el idioma cambia, se actualiza en localStorage
+  useEffect(() => {
+    localStorage.setItem('lang', lang)
+  }, [lang])
 
   return (
-    <LangContext.Provider value={{ lang, setLang: changeLang }}>
+    <LanguageContext.Provider value={{ lang, setLang }}>
       {children}
-    </LangContext.Provider>
+    </LanguageContext.Provider>
   )
 }
 
+// --- Hook personalizado para acceder al idioma global ---
 export function useLanguage() {
-  const context = useContext(LangContext)
-  if (!context) throw new Error('useLanguage must be used within LanguageProvider')
-  return context
+  return useContext(LanguageContext)
 }
