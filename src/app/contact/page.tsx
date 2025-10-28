@@ -10,6 +10,9 @@ export const metadata = {
     description:
       "Comunícate con EG Sköll Energy para recibir atención personalizada y conocer más sobre nuestros proyectos y servicios solares.",
     url: "https://egskollenergy.com/contact",
+    alternates: {
+      canonical: "https://www.egskollenergy.com/contact",
+    },
     siteName: "EG Sköll Energy",
     images: [
       {

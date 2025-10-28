@@ -4,6 +4,9 @@ export const metadata = {
   title: "Proyectos | EG Sköll Energy",
   description:
     "Proyectos de energía solar desarrollados en hogares, industrias y comunidades. Conoce nuestro impacto sostenible y tecnológico.",
+  alternates: {
+    canonical: "https://www.egskollenergy.com/projects",
+  },
   openGraph: {
     title: "Proyectos | EG Sköll Energy",
     description:

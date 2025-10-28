@@ -5,11 +5,14 @@ export const metadata = {
   title: "Nosotros | EG Sköll Energy",
   description:
     "En EG Sköll Energy creemos en un futuro impulsado por la energía limpia. Nuestro equipo de ingenieros y técnicos combina innovación, experiencia y sostenibilidad.",
+  alternates: {
+    canonical: "https://www.egskollenergy.com/about",
+  },
   openGraph: {
     title: "Nosotros | EG Sköll Energy",
     description:
       "Conoce a EG Sköll Energy: un equipo de profesionales comprometidos con el futuro sostenible de la energía solar.",
-    url: "https://egskollenergy.com/about",
+    url: "https://www.egskollenergy.com/about",
     siteName: "EG Sköll Energy",
     images: [
       {
