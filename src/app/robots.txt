@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/private
+Disallow: /api/preview
+Disallow: /drafts
+Disallow: /drafts/*
+Disallow: /internal
+Disallow: /internal/*
+
+Sitemap: https://egskollenergy.com/sitemap.xml
+
+
