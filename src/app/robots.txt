@@ -9,6 +9,6 @@ Disallow: /drafts/*
 Disallow: /internal
 Disallow: /internal/*
 
-Sitemap: https://egskollenergy.com/sitemap.xml
+Sitemap: https://www.egskollenergy.com/sitemap.xml
 
 

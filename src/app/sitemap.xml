@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://egskollenergy.com/</loc>
+    <loc>https://www.egskollenergy.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://egskollenergy.com/en</loc>
+    <loc>https://www.egskollenergy.com/en</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://egskollenergy.com/about</loc>
+    <loc>https://www.egskollenergy.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://egskollenergy.com/en/about</loc>
+    <loc>https://www.egskollenergy.com/en/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://egskollenergy.com/projects</loc>
+    <loc>https://www.egskollenergy.com/projects</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://egskollenergy.com/en/projects</loc>
+    <loc>https://www.egskollenergy.com/en/projects</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://egskollenergy.com/contact</loc>
+    <loc>https://www.egskollenergy.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://egskollenergy.com/en/contact</loc>
+    <loc>https://www.egskollenergy.com/en/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 </urlset>
+

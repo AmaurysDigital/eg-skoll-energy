@@ -1,6 +1,10 @@
 // --- METADATOS ---
-export const metadata = {
-  metadataBase: new URL("https://egskollenergy.com"),
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  // ✅ Unificamos a WWW como dominio canónico
+  metadataBase: new URL("https://www.egskollenergy.com"),
+
   title: {
     default: "EG Sköll Energy | Energía Solar Sostenible",
     template: "%s | EG Sköll Energy",
@@ -19,11 +23,21 @@ export const metadata = {
     "solar panels installation",
     "clean energy",
   ],
+
+  // ✅ Canónico + alternates ES/EN
+  alternates: {
+    canonical: "/",                   // canónico de la home (con metadataBase=WWW)
+    languages: {
+      es: "/",
+      en: "/en",
+    },
+  },
+
   openGraph: {
     title: "EG Sköll Energy | Solar Energy Solutions",
     description:
       "Innovative solar energy systems for homes and industries. EG Sköll Energy designs and installs efficient, sustainable systems for a cleaner future.",
-    url: "https://egskollenergy.com",
+    url: "https://www.egskollenergy.com",   // ✅ con WWW
     siteName: "EG Sköll Energy",
     images: [
       {
@@ -37,6 +51,7 @@ export const metadata = {
     alternateLocale: ["en_US"],
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
     title: "EG Sköll Energy | Energía Solar Sostenible",
@@ -44,16 +59,17 @@ export const metadata = {
       "Soluciones solares eficientes para hogares y empresas. EG Sköll Energy impulsa un futuro más limpio y verde.",
     images: ["/Logo2.png"],
   },
+
   icons: {
     icon: "/favicon.png",
   },
-}
+};
 
 // --- SERVIDOR ---
-import "./globals.css"
-import Navbar from "./components/Navbar"
-import HtmlLang from "./components/HtmlLang"
-import { LanguageProvider } from "./LanguageContext"
+import "./globals.css";
+import Navbar from "./components/Navbar";
+import HtmlLang from "./components/HtmlLang";
+import { LanguageProvider } from "./LanguageContext";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -71,6 +87,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </LanguageProvider>
       </body>
     </html>
-  )
+  );
 }
-
