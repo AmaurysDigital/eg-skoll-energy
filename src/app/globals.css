@@ -1,15 +1,10 @@
+/* Tailwind v4 */
 @import "tailwindcss";
 
+/* ====== Tokens claros/oscuro ====== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,19 +14,26 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ====== Tailwind theme bridge (opcional) ====== */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
-/* Ajustes globales para móviles */
+/* ====== Reset y base global ====== */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif; /* o var(--font-sans) si lo usas */
+  overflow-x: hidden; /* evita scroll horizontal accidental */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Tipografía adaptable */
@@ -39,3 +41,36 @@ h1, h2, h3, p {
   word-break: break-word;
 }
 
+/* Imágenes y medios responsivos por defecto */
+img, svg, video, canvas, audio, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Enlaces accesibles */
+a {
+  text-underline-offset: 2px;
+}
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #3b82f6; /* Tailwind blue-500 */
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Selección de texto */
+::selection {
+  background: #fde68a; /* amber-200 */
+  color: #1f2937;      /* gray-800 */
+}
+
+/* Respeta preferencias del usuario para animaciones */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

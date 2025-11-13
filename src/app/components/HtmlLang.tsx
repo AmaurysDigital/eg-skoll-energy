@@ -1,16 +1,16 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useLanguage } from '../LanguageContext'
+import { usePathname } from 'next/navigation'
 
-// --- Componente cliente que actualiza dinámicamente el atributo <html lang="..."> ---
 export default function HtmlLang() {
-  const { lang } = useLanguage()
+  const pathname = usePathname()
+  const isEnglish = pathname === '/en' || pathname.startsWith('/en/')
+  const lang = isEnglish ? 'en' : 'es'
 
   useEffect(() => {
-    // Cada vez que el idioma cambia, actualizamos el atributo <html lang="...">
     document.documentElement.lang = lang
   }, [lang])
 
-  return null // No renderiza nada visible
+  return null
 }

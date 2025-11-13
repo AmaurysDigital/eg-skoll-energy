@@ -9,7 +9,7 @@ export const metadata = {
     title: "EG Sköll Energy | Energía solar sostenible",
     description:
       "Transforma tu energía con soluciones solares de alta eficiencia. EG Sköll Energy impulsa un futuro más limpio y verde.",
-    url: "https://egskollenergy.com",
+    url: "https://www.egskollenergy.com",
     siteName: "EG Sköll Energy",
     images: [
       {

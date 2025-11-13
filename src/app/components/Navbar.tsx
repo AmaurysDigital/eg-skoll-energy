@@ -3,14 +3,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { useLanguage } from '../LanguageContext'
 
 export default function Navbar() {
-  const { lang, setLang } = useLanguage()
+  const { lang } = useLanguage()
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
+  const isEN = pathname?.startsWith('/en')
+  const current = isEN ? pathname.replace('/en', '') || '/' : pathname
+
+  // URLs bilingües
+  const hrefES = current
+  const hrefEN = current === '/' ? '/en' : `/en${current}`
+
   // Textos por idioma
-  const nav = {
+  const t = {
     es: {
       home: 'Inicio',
       about: 'Nosotros',
@@ -30,7 +39,8 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 py-4">
-        {/* LOGO + TÍTULO */}
+
+        {/* LOGO */}
         <div className="flex items-center gap-3">
           <Image
             src="/Logo2.png"
@@ -44,7 +54,7 @@ export default function Navbar() {
           </h1>
         </div>
 
-        {/* BOTÓN HAMBURGUESA MÓVIL */}
+        {/* BOTÓN MÓVIL */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden p-2 border border-emerald-600 rounded text-emerald-600"
@@ -52,7 +62,7 @@ export default function Navbar() {
           ☰
         </button>
 
-        {/* MENÚ PRINCIPAL */}
+        {/* MENÚ */}
         <ul
           className={`flex-col md:flex md:flex-row md:gap-6 text-sm font-medium absolute md:static bg-white md:bg-transparent w-full md:w-auto left-0 top-[70px] overflow-hidden transition-all duration-500 ease-in-out ${
             open
@@ -61,68 +71,70 @@ export default function Navbar() {
           }`}
         >
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/">{nav.home}</Link>
+            <Link href={isEN ? '/en' : '/'}>{t.home}</Link>
           </li>
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/about">{nav.about}</Link>
+            <Link href={isEN ? '/en/about' : '/about'}>{t.about}</Link>
           </li>
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/services">{nav.services}</Link>
+            <Link href={isEN ? '/en/services' : '/services'}>{t.services}</Link>
           </li>
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/projects">{nav.projects}</Link>
+            <Link href={isEN ? '/en/projects' : '/projects'}>{t.projects}</Link>
           </li>
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href="/contact">{nav.contact}</Link>
+            <Link href={isEN ? '/en/contact' : '/contact'}>{t.contact}</Link>
           </li>
 
-          {/* Selector de idioma (visible dentro del menú móvil) */}
+          {/* Mobile switch */}
           <div className="flex md:hidden justify-center gap-2 py-3 border-t border-gray-200 mt-2">
-            <button
-              onClick={() => setLang('es')}
+            <Link
+              href={hrefES}
               className={`px-2 py-1 rounded ${
-                lang === 'es'
+                !isEN
                   ? 'bg-emerald-600 text-white'
                   : 'border border-emerald-600 text-emerald-600'
               }`}
             >
               🇪🇸
-            </button>
-            <button
-              onClick={() => setLang('en')}
+            </Link>
+
+            <Link
+              href={hrefEN}
               className={`px-2 py-1 rounded ${
-                lang === 'en'
+                isEN
                   ? 'bg-emerald-600 text-white'
                   : 'border border-emerald-600 text-emerald-600'
               }`}
             >
               🇺🇸
-            </button>
+            </Link>
           </div>
         </ul>
 
-        {/* Selector de idioma (visible solo en escritorio) */}
+        {/* Desktop switch */}
         <div className="hidden md:flex gap-2">
-          <button
-            onClick={() => setLang('es')}
+          <Link
+            href={hrefES}
             className={`px-2 py-1 rounded ${
-              lang === 'es'
+              !isEN
                 ? 'bg-emerald-600 text-white'
                 : 'border border-emerald-600 text-emerald-600'
             }`}
           >
             🇪🇸
-          </button>
-          <button
-            onClick={() => setLang('en')}
+          </Link>
+
+          <Link
+            href={hrefEN}
             className={`px-2 py-1 rounded ${
-              lang === 'en'
+              isEN
                 ? 'bg-emerald-600 text-white'
                 : 'border border-emerald-600 text-emerald-600'
             }`}
           >
             🇺🇸
-          </button>
+          </Link>
         </div>
       </div>
     </nav>
