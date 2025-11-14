@@ -4,43 +4,45 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { useLanguage } from '../LanguageContext'
 
+// Navbar bilingüe basado en la URL
 export default function Navbar() {
-  const { lang } = useLanguage()
-  const pathname = usePathname()
+  const pathname = usePathname() || '/'
   const [open, setOpen] = useState(false)
 
-  const isEN = pathname?.startsWith('/en')
-  const current = isEN ? pathname.replace('/en', '') || '/' : pathname
+  const isEN = pathname === '/en' || pathname.startsWith('/en/')
+  const base = isEN ? '/en' : ''
 
-  // URLs bilingües
-  const hrefES = current
-  const hrefEN = current === '/' ? '/en' : `/en${current}`
+  const nav = isEN
+    ? {
+        home: 'Home',
+        about: 'About',
+        services: 'Services',
+        projects: 'Projects',
+        contact: 'Contact',
+      }
+    : {
+        home: 'Inicio',
+        about: 'Nosotros',
+        services: 'Servicios',
+        projects: 'Proyectos',
+        contact: 'Contacto',
+      }
 
-  // Textos por idioma
-  const t = {
-    es: {
-      home: 'Inicio',
-      about: 'Nosotros',
-      services: 'Servicios',
-      projects: 'Proyectos',
-      contact: 'Contacto',
-    },
-    en: {
-      home: 'Home',
-      about: 'About',
-      services: 'Services',
-      projects: 'Projects',
-      contact: 'Contact',
-    },
-  }[lang]
+  // URLs para cambiar idioma manteniendo la sección
+  const pathWithoutEn = pathname.replace(/^\/en/, '') || '/'
+  const hrefES = pathWithoutEn === '' ? '/' : pathWithoutEn
+  const hrefEN =
+    pathname === '/' || pathname === '/en'
+      ? '/en'
+      : pathname.startsWith('/en')
+      ? pathname
+      : `/en${pathname}`
 
   return (
     <nav className="w-full bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 py-4">
-
-        {/* LOGO */}
+        {/* LOGO + NOMBRE */}
         <div className="flex items-center gap-3">
           <Image
             src="/Logo2.png"
@@ -54,15 +56,16 @@ export default function Navbar() {
           </h1>
         </div>
 
-        {/* BOTÓN MÓVIL */}
+        {/* BOTÓN HAMBURGUESA (MÓVIL) */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden p-2 border border-emerald-600 rounded text-emerald-600"
+          aria-label="Abrir menú"
         >
           ☰
         </button>
 
-        {/* MENÚ */}
+        {/* MENÚ LINKS */}
         <ul
           className={`flex-col md:flex md:flex-row md:gap-6 text-sm font-medium absolute md:static bg-white md:bg-transparent w-full md:w-auto left-0 top-[70px] overflow-hidden transition-all duration-500 ease-in-out ${
             open
@@ -71,22 +74,44 @@ export default function Navbar() {
           }`}
         >
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href={isEN ? '/en' : '/'}>{t.home}</Link>
+            <Link href={isEN ? '/en' : '/'} onClick={() => setOpen(false)}>
+              {nav.home}
+            </Link>
           </li>
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href={isEN ? '/en/about' : '/about'}>{t.about}</Link>
+            <Link
+              href={`${base}/about` || '/about'}
+              onClick={() => setOpen(false)}
+            >
+              {nav.about}
+            </Link>
           </li>
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href={isEN ? '/en/services' : '/services'}>{t.services}</Link>
+            <Link
+              href={`${base}/services` || '/services'}
+              onClick={() => setOpen(false)}
+            >
+              {nav.services}
+            </Link>
           </li>
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href={isEN ? '/en/projects' : '/projects'}>{t.projects}</Link>
+            <Link
+              href={`${base}/projects` || '/projects'}
+              onClick={() => setOpen(false)}
+            >
+              {nav.projects}
+            </Link>
           </li>
           <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href={isEN ? '/en/contact' : '/contact'}>{t.contact}</Link>
+            <Link
+              href={`${base}/contact` || '/contact'}
+              onClick={() => setOpen(false)}
+            >
+              {nav.contact}
+            </Link>
           </li>
 
-          {/* Mobile switch */}
+          {/* Selector de idioma en menú móvil */}
           <div className="flex md:hidden justify-center gap-2 py-3 border-t border-gray-200 mt-2">
             <Link
               href={hrefES}
@@ -95,10 +120,10 @@ export default function Navbar() {
                   ? 'bg-emerald-600 text-white'
                   : 'border border-emerald-600 text-emerald-600'
               }`}
+              onClick={() => setOpen(false)}
             >
               🇪🇸
             </Link>
-
             <Link
               href={hrefEN}
               className={`px-2 py-1 rounded ${
@@ -106,13 +131,14 @@ export default function Navbar() {
                   ? 'bg-emerald-600 text-white'
                   : 'border border-emerald-600 text-emerald-600'
               }`}
+              onClick={() => setOpen(false)}
             >
               🇺🇸
             </Link>
           </div>
         </ul>
 
-        {/* Desktop switch */}
+        {/* Selector de idioma en escritorio */}
         <div className="hidden md:flex gap-2">
           <Link
             href={hrefES}
@@ -124,7 +150,6 @@ export default function Navbar() {
           >
             🇪🇸
           </Link>
-
           <Link
             href={hrefEN}
             className={`px-2 py-1 rounded ${
