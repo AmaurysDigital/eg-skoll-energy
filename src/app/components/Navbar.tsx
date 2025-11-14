@@ -5,15 +5,13 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 
-// Navbar bilingüe basado en la URL
 export default function Navbar() {
   const pathname = usePathname() || '/'
   const [open, setOpen] = useState(false)
 
   const isEN = pathname === '/en' || pathname.startsWith('/en/')
-  const base = isEN ? '/en' : ''
 
-  const nav = isEN
+  const labels = isEN
     ? {
         home: 'Home',
         about: 'About',
@@ -29,7 +27,10 @@ export default function Navbar() {
         contact: 'Contacto',
       }
 
-  // URLs para cambiar idioma manteniendo la sección
+  // Rutas base según idioma actual
+  const base = isEN ? '/en' : ''
+
+  // URLs para cambiar de idioma manteniendo la sección
   const pathWithoutEn = pathname.replace(/^\/en/, '') || '/'
   const hrefES = pathWithoutEn === '' ? '/' : pathWithoutEn
   const hrefEN =
@@ -39,10 +40,40 @@ export default function Navbar() {
       ? pathname
       : `/en${pathname}`
 
+  const menuItems = (
+    <>
+      <li className="py-2 md:py-0 hover:text-emerald-600">
+        <Link href={isEN ? '/en' : '/'} onClick={() => setOpen(false)}>
+          {labels.home}
+        </Link>
+      </li>
+      <li className="py-2 md:py-0 hover:text-emerald-600">
+        <Link href={`${base}/about`} onClick={() => setOpen(false)}>
+          {labels.about}
+        </Link>
+      </li>
+      <li className="py-2 md:py-0 hover:text-emerald-600">
+        <Link href={`${base}/services`} onClick={() => setOpen(false)}>
+          {labels.services}
+        </Link>
+      </li>
+      <li className="py-2 md:py-0 hover:text-emerald-600">
+        <Link href={`${base}/projects`} onClick={() => setOpen(false)}>
+          {labels.projects}
+        </Link>
+      </li>
+      <li className="py-2 md:py-0 hover:text-emerald-600">
+        <Link href={`${base}/contact`} onClick={() => setOpen(false)}>
+          {labels.contact}
+        </Link>
+      </li>
+    </>
+  )
+
   return (
     <nav className="w-full bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 py-4">
-        {/* LOGO + NOMBRE */}
+        {/* Logo + nombre */}
         <div className="flex items-center gap-3">
           <Image
             src="/Logo2.png"
@@ -56,7 +87,7 @@ export default function Navbar() {
           </h1>
         </div>
 
-        {/* BOTÓN HAMBURGUESA (MÓVIL) */}
+        {/* Botón hamburguesa (móvil) */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden p-2 border border-emerald-600 rounded text-emerald-600"
@@ -65,77 +96,9 @@ export default function Navbar() {
           ☰
         </button>
 
-        {/* MENÚ LINKS */}
-        <ul
-          className={`flex-col md:flex md:flex-row md:gap-6 text-sm font-medium absolute md:static bg-white md:bg-transparent w-full md:w-auto left-0 top-[70px] overflow-hidden transition-all duration-500 ease-in-out ${
-            open
-              ? 'max-h-96 opacity-100'
-              : 'max-h-0 opacity-0 md:opacity-100'
-          }`}
-        >
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link href={isEN ? '/en' : '/'} onClick={() => setOpen(false)}>
-              {nav.home}
-            </Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link
-              href={`${base}/about` || '/about'}
-              onClick={() => setOpen(false)}
-            >
-              {nav.about}
-            </Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link
-              href={`${base}/services` || '/services'}
-              onClick={() => setOpen(false)}
-            >
-              {nav.services}
-            </Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link
-              href={`${base}/projects` || '/projects'}
-              onClick={() => setOpen(false)}
-            >
-              {nav.projects}
-            </Link>
-          </li>
-          <li className="py-2 md:py-0 hover:text-emerald-600">
-            <Link
-              href={`${base}/contact` || '/contact'}
-              onClick={() => setOpen(false)}
-            >
-              {nav.contact}
-            </Link>
-          </li>
-
-          {/* Selector de idioma en menú móvil */}
-          <div className="flex md:hidden justify-center gap-2 py-3 border-t border-gray-200 mt-2">
-            <Link
-              href={hrefES}
-              className={`px-2 py-1 rounded ${
-                !isEN
-                  ? 'bg-emerald-600 text-white'
-                  : 'border border-emerald-600 text-emerald-600'
-              }`}
-              onClick={() => setOpen(false)}
-            >
-              🇪🇸
-            </Link>
-            <Link
-              href={hrefEN}
-              className={`px-2 py-1 rounded ${
-                isEN
-                  ? 'bg-emerald-600 text-white'
-                  : 'border border-emerald-600 text-emerald-600'
-              }`}
-              onClick={() => setOpen(false)}
-            >
-              🇺🇸
-            </Link>
-          </div>
+        {/* Menú en escritorio */}
+        <ul className="hidden md:flex md:gap-6 text-sm font-medium">
+          {menuItems}
         </ul>
 
         {/* Selector de idioma en escritorio */}
@@ -162,6 +125,38 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+
+      {/* Menú desplegable en móvil */}
+      {open && (
+        <div className="md:hidden px-6 pb-4 border-t border-gray-200 bg-white">
+          <ul className="flex flex-col text-sm font-medium">{menuItems}</ul>
+
+          <div className="flex justify-center gap-2 mt-3">
+            <Link
+              href={hrefES}
+              className={`px-2 py-1 rounded ${
+                !isEN
+                  ? 'bg-emerald-600 text-white'
+                  : 'border border-emerald-600 text-emerald-600'
+              }`}
+              onClick={() => setOpen(false)}
+            >
+              🇪🇸
+            </Link>
+            <Link
+              href={hrefEN}
+              className={`px-2 py-1 rounded ${
+                isEN
+                  ? 'bg-emerald-600 text-white'
+                  : 'border border-emerald-600 text-emerald-600'
+              }`}
+              onClick={() => setOpen(false)}
+            >
+              🇺🇸
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   )
 }
