@@ -76,7 +76,7 @@ export default function Navbar() {
         {/* Logo + nombre */}
         <div className="flex items-center gap-3">
           <Image
-            src="/logooficial.jpg"
+            src="/logooficial.png"
             alt="Sköll Energy Logo"
             width={40}
             height={40}
