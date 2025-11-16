@@ -9,20 +9,20 @@ export default function LocalizedAbout() {
     ? {
         title: 'Sobre nosotros',
         intro:
-          'En Sköll Energy creemos en un futuro impulsado por la energía limpia y accesible.',
+          'En Sköll Energy Group creemos en un futuro impulsado por la energía limpia y accesible.',
         text1:
-          'Nuestro equipo de ingenieros y técnicos combina tecnología avanzada con un compromiso genuino por la sostenibilidad, ofreciendo soluciones solares que reducen costos y protegen el planeta.',
+          'EG SKRÖLL ENERGY GROUP es un grupo que se crea como espacio de colaboración, asesoría e intercambio que surge de varios actores económicos no estatales con proyección al sector de las tecnologías renovables y la construcción, con el objetivo de establecer sinérgias y protocolos de trabajo que permitan dar un servicio mas eficiente y reducir costes de logística, almacenamiento, materia prima y capacitación que redunden en mejores precios de cara al cliente.',
         text2:
-          'Nos enorgullece trabajar con altos estándares de calidad, integrando innovación, precisión técnica y respeto por el medio ambiente en cada proyecto que emprendemos.',
+          'El grupo, también se encarga de la divulgación y promoción de las ventajas y oportunidades que ofrecen las tecnologías de energía renovable para la sociedad en su conjunto. También busca facilitar a sus miembros las herramientas técnicas necesarias para ejercer con mayor profesionalidad su trabajo.',
       }
     : {
         title: 'About us',
         intro:
           'At Sköll Energy, we believe in a future powered by clean and accessible energy.',
         text1:
-          'Our team of engineers and technicians combines advanced technology with a genuine commitment to sustainability, offering solar solutions that reduce costs and protect the planet.',
+          'EG SKRÖLL ENERGY GROUP was created as a collaborative space for consulting, cooperation, and knowledge exchange. It brings together several non-state economic actors with a strong focus on the renewable energy and construction sectors, with the goal of establishing synergies and work protocols that enable more efficient service, while reducing logistics, storage, raw material, and training costs — ultimately allowing for better prices for the client.',
         text2:
-          'We take pride in working with high-quality standards, integrating innovation, technical precision, and environmental respect into every project we undertake.',
+          'The group also promotes the dissemination and awareness of the advantages and opportunities that renewable energy technologies offer to society as a whole. Additionally, it seeks to provide its members with the technical tools necessary to perform their work with greater professionalism.',
       }
 
   return (

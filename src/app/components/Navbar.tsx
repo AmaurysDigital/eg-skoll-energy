@@ -76,14 +76,14 @@ export default function Navbar() {
         {/* Logo + nombre */}
         <div className="flex items-center gap-3">
           <Image
-            src="/Logo2.png"
+            src="/logooficial.jpg"
             alt="Sköll Energy Logo"
             width={40}
             height={40}
             priority
           />
           <h1 className="text-xl md:text-2xl font-bold text-emerald-600">
-            Sköll Energy
+            Sköll Energy Group
           </h1>
         </div>
 
