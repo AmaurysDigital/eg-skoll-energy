@@ -242,8 +242,9 @@ export default function LocalizedProjects() {
             <div className="mt-6 flex justify-end">
               <Link
                 href={`${
-                  currentLang === 'es' ? '/contacto' : '/en/contact'
+                  currentLang === 'es' ? '/contact' : '/en/contact'
                 }?project=${encodeURIComponent(openProject.id)}`}
+
                 className="inline-flex items-center px-5 py-2.5 rounded-full bg-emerald-600 text-white font-semibold hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-white transition"
               >
                 {currentLang === 'es'
